@@ -2,6 +2,46 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::middleware([])->group(function () {
+
+    Route::prefix('categorias')->group(function () {
+        Route::get('/{flag}/news/{count?}', function ($flag, $count = '10') {
+            return "Produtos da categoria {$flag} (noticias)";
+        });
+        
+        Route::get('/{flag}', function ($flag) {
+            return "Produtos da categoria {$flag}";
+        });
+
+        Route::namespace('Admin')->group(function () {
+            Route::get('/', 'TesteController@teste');
+        });
+    });
+
+});
+
+/*
+
+// mais enxuto
+
+Route::group([
+    'middleware' => ['auth'],
+    'prefix' => 'categorias',
+    'namespace' => 'Admin'
+], function () {
+
+});
+
+*/
+
+Route::get('admin/dashboard', function () {
+    return 'Home Admin';
+})->middleware(['auth']);
+
+Route::get('/login', function () {
+    return 'Login';
+})->name('login');
+
 Route::get('/redirect4', function () {
     return redirect()->route('rota.nomeada');
 });
@@ -20,14 +60,6 @@ Route::get('/redirect1', function () {
 
 Route::get('/redirect2', function () {
     return 'red 2';
-});
-
-Route::get('/categorias/{flag}/news/{count?}', function ($flag, $count = '10') {
-    return "Produtos da categoria {$flag} (noticias)";
-});
-
-Route::get('/categorias/{flag}', function ($flag) {
-    return "Produtos da categoria {$flag}";
 });
 
 Route::match(['post', 'put'], '/match', function () {
