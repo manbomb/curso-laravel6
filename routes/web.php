@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/products/{id}', 'ProductController@show')->name('products.show');
+
+Route::get('/products', 'ProductController@index')->name('products.index');
+
+/*
 Route::middleware([])->group(function () {
 
     Route::prefix('categorias')->group(function () {
@@ -19,10 +24,11 @@ Route::middleware([])->group(function () {
     });
 
 });
-
+*/
 /*
 
 // mais enxuto (name não funciona)
+// php artisan route:cache (limpa o cache das rotas)
 
 Route::group([
     'middleware' => ['auth'],
@@ -33,7 +39,7 @@ Route::group([
 });
 
 */
-
+/*
 Route::get('admin/dashboard', function () {
     return 'Home Admin';
 })->middleware(['auth']);
@@ -82,3 +88,4 @@ Route::get('/contato', function () {
 Route::get('/', function () {
     return 'Olá';
 });
+*/
